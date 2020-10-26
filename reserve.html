@@ -3,23 +3,55 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Form Server POST</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Reservations</title>
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   </head>
   <body>
     <form action="/" method="post">
-      <label for="firstname">First name:</label><br />
-      <input type="text" id="firstname" name="firstname" value="John" /><br />
-      <label for="lastname">Last name:</label><br />
-      <input type="text" id="lastname" name="lastname" value="Doe" />
-      <label for="contactnumber">First name:</label><br />
-      <input
-        type="number"
-        id="contactnumber"
-        name="contactnumber"
-        value="xxxx-xxx-xxx"
-      /><br />
-      <br /><br />
-      <input type="submit" value="Submit" />
+      <div class="form-group">
+        <label for="name">Name:</label><br />
+        <input type="text" id="name" name="name" value="John" /><br />
+        <label for="email">Email:</label><br />
+      </div>
+      <div class="form-group">
+        <input type="text" id="email" name="email" value="email@email.com" />
+        <label for="contactnumber">Contact Number:</label><br />
+        <input
+          type="text"
+          id="contactnumber"
+          name="contactnumber"
+          value="xxxx-xxx-xxx / xxxx-xxxx"
+        /><br />
+        <br /><br />
+        <input type="submit" id="submit-btn" value="Submit" />
+      </div>
     </form>
   </body>
+  <script type="text/javascript">
+    // Question: What does this code do?
+    $("#submit-btn").on("click", function (event) {
+      event.preventDefault();
+      const newReserver = {
+        name: $("#name").val().trim(),
+        email: $("#email").val().trim(),
+        contactnumber: $("#contactnumber").val().trim(),
+      };
+
+      // Question: What does this code do??
+      $.post("/'ourwebapp'/reservations", newReserver).then(function (data) {
+        console.log("tables.html", data);
+      });
+    });
+  </script>
 </html>
